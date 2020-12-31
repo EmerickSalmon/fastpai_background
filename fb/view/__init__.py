@@ -8,6 +8,6 @@ def health():
     return "Up"
 
 @app.post("/long-task/")
-def l_task(delay:int = 5):
-    long_task(delay)
+def l_task(background_tasks: BackgroundTasks, delay:int = 5):
+    background_tasks.add_task(long_task, delay)
     return {"Result": "finished"}
