@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, BackgroundTasks
 from fb.controler import long_task
 
 app = FastAPI()
@@ -7,7 +7,7 @@ app = FastAPI()
 def health():
     return "Up"
 
-@app.port("/long-task/")
+@app.post("/long-task/")
 def l_task(delay:int = 5):
     long_task(delay)
     return {"Result": "finished"}
